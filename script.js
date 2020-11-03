@@ -1,5 +1,11 @@
 const calculator = document.querySelector('.calculator');
 const calcDisplay = calculator.querySelector(".calc-display #display");
+
+const calcExpression = calculator.querySelector(".calc-display .current-expression")
+let calcExpressionNum1 = calcExpression.querySelector("#num1");
+let calcExpressionOp = calcExpression.querySelector("#operator");
+let calcExpressionNum2 = calcExpression.querySelector("#num2");
+
 const calcBtnContainer = calculator.querySelector(".buttons");
 
 let operator = "";  // hold the current operator value
@@ -76,24 +82,49 @@ function clearAll() {
     num2 = "";
     operator = "";
     calcDisplay.placeholder = "";
+    calcExpressionNum1.textContent = "";
+    calcExpressionNum2.textContent = "";
+    calcExpressionOp.textContent = "";
 }
 
 const setOperation = operation => {
     operator = operation;
+    calcExpressionOp.textContent = operator;
 
     if (calcDisplay.placeholder !== "") {
         if (num1 === "") {
+            calcExpressionNum1.textContent = calcDisplay.placeholder;
+            calcExpressionNum2.textContent = "";
             num1 = Number(calcDisplay.placeholder);
             clearEntry();
+            removeActiveClasses();
         }
     }
 }
 
 const calcResult = () => {
     if (calcDisplay.placeholder !== "" && num1 !== "") {
+        calcExpressionNum2.textContent = calcDisplay.placeholder;
         num2 = Number(calcDisplay.placeholder);
         clearEntry();
+        removeActiveClasses();
         operate(operator, num1, num2);
+    }
+}
+
+const makePosNeg = () => {
+    if (calcDisplay.placeholder !== "") {
+        calcDisplay.placeholder = Number(calcDisplay.placeholder) * -1;
+    }
+}
+
+function removeActiveClasses() {
+    let operationsBtn = calcBtnContainer.querySelectorAll(".operation");
+
+    for (let operationBtn of operationsBtn) {
+        let span = operationBtn.querySelector("span");
+        operationBtn.classList.remove("active-element");
+        span.classList.remove("current-operation");
     }
 }
 
@@ -101,10 +132,57 @@ calcBtnContainer.addEventListener('click', e => {
     let buttonEl = e.target;
     let buttonVal = buttonEl.value;
 
-    if (buttonEl.classList.contains("digit")) showOnDisplay(buttonVal);
-    if (buttonEl.classList.contains("operation")) setOperation(buttonVal);
+    if (buttonEl.classList.contains("digit")){
+        showOnDisplay(buttonVal);
+    }
 
+    if (buttonEl.classList.contains("operation")) {
+        let currentSpan = buttonEl.querySelector("span");
+        removeActiveClasses();
+
+        currentSpan.classList.add("current-operation");
+        buttonEl.classList.add("active-element");
+        setOperation(buttonVal);
+    }
+
+    buttonVal === "+/-" ? makePosNeg() : null;
     buttonVal === "=" ? calcResult() : null;
     buttonVal === "AC" ? clearAll() : null;
     buttonVal === "C" ? clearEntry() : null;
+});
+
+
+document.addEventListener('keydown', e => {
+    const operators = ["+", "-", "*", "^", "/"];
+
+    if (isNaN(Number(e.key))) {
+        if (e.key === ".") {
+            if (!calcDisplay.placeholder.includes(".") && calcDisplay.placeholder !== "") {   // avoid extra dots
+                calcDisplay.placeholder += ".";
+            }
+        }
+    } else {
+        showOnDisplay(e.key);
+    }
+
+    e.key === "Backspace" ? clearEntry() : null;
+
+    // Check for combination of keys (shift + *, etc...)
+    if (operators.includes(e.key)) {
+        let operationsBtn = calcBtnContainer.querySelectorAll(".operation");
+
+        removeActiveClasses();
+
+        for (let operationBtn of operationsBtn) {
+            if(operationBtn.value === e.key) {
+                let span = operationBtn.querySelector("span");
+                operationBtn.classList.add("active-element");
+                span.classList.add("current-operation");
+                break;
+            }
+        }
+    }
+
+    operators.includes(e.key) ? setOperation(e.key) : null;
+    e.key === "Enter" ? calcResult() : null;
 });
