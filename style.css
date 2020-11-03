@@ -5,37 +5,145 @@
 }
 
 body {
-  background-color: black;
+  font-family: "Rubik", sans-serif;
+  background-color: #2d4059;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-size: 40px;
+}
+
+sup {
+  font-size: 13px;
+  margin-left: 2px;
+}
+
+/* Highlight the current selected operation */
+.current-operation {
+  border-bottom: 2px solid black;
+}
+
+.active-element {
+  background-color: #b8de6f;
+  color: black;
+}
+
+.current-expression {
+  position: absolute;
+  left: 10px;
+  top: 2px;
+  font-size: 13px;
+  color: rgb(133, 133, 133);
 }
 
 button {
   cursor: pointer;
-  background-color: green;
-  color: black;
-}
-
-.calculator {
-  border: 1px solid rebeccapurple;
-  width: 50%;
-  height: 50vh;
-  margin: 200px auto 100px auto;
-  padding: 0px 10px;
-}
-
-.calculator #display {
-  width: 100%;
-  text-align: right;
-  margin-bottom: 10px;
-  border: 1px solid orange;
-  background-color: rgb(155, 139, 139);
-  color: black;
+  border-radius: 0px;
+  border: none;
+  background-color: #2d4059;
+  color: white;
   font-size: 20px;
 }
 
+.digit:hover {
+  background-color: white;
+  color: #2d4059;
+}
+
+.operation:hover {
+  background-color: #b8de6f;
+  color: black;
+}
+
+.functional:hover {
+  background-color: #fcf876;
+  color: #000;
+}
+
+.equal {
+  background-color: #f9813a;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 50px;
+}
+
+.left-menu {
+  color: white;
+}
+
+.left-menu h2 {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.left-menu ul li {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.left-menu ul li code {
+  background-color: whitesmoke;
+  color: rgb(40, 153, 228);
+  font-weight: bold;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+.calculator {
+  width: 80%;
+  height: 450px;
+}
+
+.calculator .calc-display {
+  height: 60px;
+  position: relative;
+}
+
+.calc-display #display {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  text-align: right;
+  font-size: 30px;
+  padding: 0px 20px;
+}
+
 .calculator .buttons {
-  border: 1px solid yellowgreen;
-  height: 42vh;
+  height: 388px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  border: 1px solid #fff;
+}
+
+@media screen and (min-width: 500px) {
+  .calculator {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .calculator {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-menu {
+    display: none;
+  }
 }

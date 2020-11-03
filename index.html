@@ -4,48 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="style.css">
     <title>Calculator</title>
 </head>
 <body>
-    <div class="calculator">
-        <div class="calc-display">
-            <input type="text" id="display" placeholder="" disabled>
+    <h1>Calculator 🤓</h1>
+    <div class="wrapper">
+        <div class="left-menu">
+            <h2>Keyboard Shortcuts</h2>
+            <ul>
+                <li>
+                    <code>Ctrl</code> + <code>Shift</code> + <code>/</code> for division
+                </li>
+                <li>
+                    <code>Ctrl</code> + <code>Shift</code> + <code>^</code> for power
+                </li>
+                <li>
+                    <code>Ctrl</code> + <code>Shift</code> + <code>*</code> for multiplication
+                </li>
+                <li>
+                    <code>+</code> for sum
+                </li>
+                <li>
+                    <code>-</code> for subtraction
+                </li>
+                <li>
+                    <code>backspace</code> for delete entry
+                </li>
+                <li>
+                    <code>Enter</code> for get result
+                </li>
+            </ul>
         </div>
-        <div class="buttons">
-            <!-- First row-->
-            <button class="functional" value="AC">AC</button>
-            <button class="functional" value="C">C</button>
-            <button class="operation" value="^">^</button>
-            <button class="operation" value="/">/</button>
+        <div class="calculator">
+            <div class="calc-display">
+                <span class="current-expression">
+                    <span id="num1"></span>
+                    <span id="operator"></span>
+                    <span id="num2"></span>
+                </span>
+                <input type="text" id="display" placeholder="" disabled>
+            </div>
+            <div class="buttons">
+                <!-- First row-->
+                <button class="functional" value="AC">AC</button>
+                <button class="functional" value="C">C</button>
+                <button class="operation" value="^">
+                    <span>
+                        n<sup>x</sup>
+                    </span>
+                </button>
+                <button class="operation" value="/">
+                    <span>÷</span>
+                </button>
 
-            <!-- Second row-->
-            <button class="digit" value="7">7</button>
-            <button class="digit" value="8">8</button>
-            <button class="digit" value="9">9</button>
-            <button class="operation" value="*">*</button>
+                <!-- Second row-->
+                <button class="digit" value="7">7</button>
+                <button class="digit" value="8">8</button>
+                <button class="digit" value="9">9</button>
+                <button class="operation" value="*">
+                    <span>x</span>
+                </button>
 
-            <!-- Third row-->
-            <button class="digit" value="4">4</button>
-            <button class="digit" value="5">5</button>
-            <button class="digit" value="6">6</button>
-            <button class="operation" value="-">-</button>
+                <!-- Third row-->
+                <button class="digit" value="4">4</button>
+                <button class="digit" value="5">5</button>
+                <button class="digit" value="6">6</button>
+                <button class="operation" value="-">
+                    <span>-</span>
+                </button>
 
-            <!-- Fourth row-->
-            <button class="digit" value="1">1</button>
-            <button class="digit" value="2">2</button>
-            <button class="digit" value="3">3</button>
-            <button class="operation" value="+">+</button>
+                <!-- Fourth row-->
+                <button class="digit" value="1">1</button>
+                <button class="digit" value="2">2</button>
+                <button class="digit" value="3">3</button>
+                <button class="operation" value="+">
+                    <span>+</span>
+                </button>
 
-            <!-- Fifth row-->
-            <button class="functional" value="+/-">+/-</button>
-            <button class="digit" value="0">0</button>
-            <button class="digit" value=".">.</button>
-            <button class="equal" value="=">=</button>
+                <!-- Fifth row-->
+                <button class="functional" value="+/-">+/-</button>
+                <button class="digit" value="0">0</button>
+                <button class="digit" value=".">.</button>
+                <button class="equal" value="=">=</button>
+            </div>
         </div>
     </div>
-
     <!-- JS -->
     <script src="script.js"></script>
 </body>
