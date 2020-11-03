@@ -122,9 +122,7 @@ function removeActiveClasses() {
     let operationsBtn = calcBtnContainer.querySelectorAll(".operation");
 
     for (let operationBtn of operationsBtn) {
-        let span = operationBtn.querySelector("span");
         operationBtn.classList.remove("active-element");
-        span.classList.remove("current-operation");
     }
 }
 
@@ -137,10 +135,8 @@ calcBtnContainer.addEventListener('click', e => {
     }
 
     if (buttonEl.classList.contains("operation")) {
-        let currentSpan = buttonEl.querySelector("span");
         removeActiveClasses();
 
-        currentSpan.classList.add("current-operation");
         buttonEl.classList.add("active-element");
         setOperation(buttonVal);
     }
@@ -175,9 +171,7 @@ document.addEventListener('keydown', e => {
 
         for (let operationBtn of operationsBtn) {
             if(operationBtn.value === e.key) {
-                let span = operationBtn.querySelector("span");
                 operationBtn.classList.add("active-element");
-                span.classList.add("current-operation");
                 break;
             }
         }
